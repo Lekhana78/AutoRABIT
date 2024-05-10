@@ -1,0 +1,111 @@
+<template>
+    <lightning-card>
+        <div class="slds-align_absolute-center">
+            <header class="slds-truncate">
+                <h1 class="slds-section__title" ><p style="color:#080909; text-align:middle"><strong><font size="6"> &nbsp; Custom Label And Remote Site Setting Updation Utility</font></strong></p> </h1>
+            </header>
+        </div><br/>
+
+        <div class="slds-box" style="height: auto;">
+                    <h1 class="slds-section__title">
+                        <div class="slds-truncate" title="Select Action" ><span class="required">*</span><strong><font size="3"> Select Action : &nbsp;</font></strong></div>
+                    </h1>
+
+                    <p class="slds-var-p-left_x-small" style="text-align:middle"> <strong><font size="2">
+                            <lightning-radio-group label="" 
+                                                value={valueAct} 
+                                                options={optionsAct}
+                                                onchange={selectedHandler}
+                                                type="radio"
+                                                variant="label-hidden"
+                                                style="columns: 4;">
+                            </lightning-radio-group>
+                    </font></strong></p>  <br/>
+
+                    <div class="slds-size_5-of-1 slds-var-p-around_long slds-size_full slds-border_bottom"></div><br/>
+
+                    <lightning-layout multiple-rows="true">
+                        <lightning-layout-item size="4">
+                                <h1 class="slds-section__title" >
+                                    <div class="slds-truncate" title="Select Sandboxes" ><span class="required">*</span><strong><font size="3"> Select Sandbox : &nbsp;</font></strong></div>
+                                </h1>
+                                <p class="slds-var-p-left_x-small" style="text-align:middle"> <strong><font size="2">
+                                        <lightning-combobox label="" 
+                                                            value={Value} 
+                                                            options={Options}
+                                                            onchange={selectedValuehandler}
+                                                            placeholder="Select Sandbox"
+                                                            variant="label-hidden"
+                                                            style="color:rgb(50, 64, 188);width:250px;">
+                                        </lightning-combobox>
+                                </font></strong></p> 
+                        </lightning-layout-item><br/>
+
+                     <lightning-layout-item size="4">
+                        <div class="upload-label">
+                            <span class="required">*</span><strong><font size="3"> Upload CSV File : &nbsp;</font></strong>
+                        <template if:true={showCustomLabelBtn}>
+                            <lightning-helptext content="CSV Headers should be in this format. Name, Short Description, Language,Value,Categories "></lightning-helptext>
+                        </template>
+                        <template if:true={showRSSBtn}>
+                            <lightning-helptext content="CSV Headers should be in this format. Name, Url"></lightning-helptext>
+                        </template>
+                </div>
+                        <lightning-input
+                                            label="Upload CSV File"
+                                            type="file"
+                                            accept=".csv"
+                                            onchange={handleFileChange}
+                                            variant="label-hidden"
+                                            class="custom-file-input">
+                            </lightning-input> &nbsp;&nbsp;<p if:true={fileName}>{fileName}</p>
+                    </lightning-layout-item>
+                </lightning-layout><br/>
+                
+               <div class="slds-size_5-of-1 slds-var-p-around_long slds-size_full slds-border_bottom"></div><br/>
+                    <!-- Button -->
+                    <template if:true={showSpinnerFlag} >
+                        <div class="backgroundInverse" style="min-height:3rem;transform: translate(0, 0);">
+                            <lightning-spinner alternative-text="Loading" size="medium" ></lightning-spinner>
+                        </div>
+                    </template> 
+
+                      <p class="slds-var-p-left_x-small" style="text-align:center"><strong><font size="3">
+                        <template if:true={showCustomLabelBtn}>
+                          <lightning-button style="width:1500px" variant="brand-outline" icon-name="action:record" label="Update Custom Label" onclick={createCustomLabelHandler}></lightning-button> 
+                        </template>
+
+                        <template if:true={showRSSBtn}>
+                            <lightning-button style="width:1500px" variant="brand-outline" icon-name="action:record" label="Update Remote Site setting" onclick={createRSSHandler}></lightning-button> 
+                        </template>
+                    </font></strong></p>
+                   
+           
+           <!-- Check if csvRows has elements to display the table -->
+           <template if:true={csvRows.length}>
+           <br/>
+            <div class="slds-box slds-theme_default" >
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped">
+                <thead >
+                    <tr class="slds-line-height_reset">
+                        <template for:each={csvHeaders} for:item="header">
+                            <th key={header}><div class="slds-truncate">{header}</div></th>
+                        </template>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={csvRows} for:item="row">
+                        <tr key={row.id} class="slds-hint-parent">
+                            <template for:each={row.data} for:item="cell" for:index="index">
+                                <!-- Ensure the expression inside the key attribute is correctly quoted -->
+                                <td key={row.id} ><div class="slds-truncate"> {cell}</div></td>
+                            </template>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+        </template>
+        </div>
+    </lightning-card>
+</template>

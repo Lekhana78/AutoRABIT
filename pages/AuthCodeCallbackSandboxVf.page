@@ -1,0 +1,11 @@
+<apex:page controller="CallbackControllerSandbox" action="{!captureCode}">
+    <script type = "text/javascript">
+    window.onload=function()       
+    {        
+        window.close();
+    };
+</script>
+    <h1 style='font-size:50px'>
+         Authenticated Successfully. You Can Close This Page.
+    </h1>
+</apex:page>

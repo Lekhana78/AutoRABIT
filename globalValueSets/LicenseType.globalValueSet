@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>DEVELOPER</fullName>
+        <default>false</default>
+        <label>DEVELOPER</label>
+    </customValue>
+    <customValue>
+        <fullName>DEVELOPER_PRO</fullName>
+        <default>false</default>
+        <label>DEVELOPER_PRO</label>
+    </customValue>
+    <customValue>
+        <fullName>PARTIAL</fullName>
+        <default>false</default>
+        <label>PARTIAL</label>
+    </customValue>
+    <customValue>
+        <fullName>FULL</fullName>
+        <default>false</default>
+        <label>FULL</label>
+    </customValue>
+    <masterLabel>LicenseType</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>
